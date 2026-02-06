@@ -9,46 +9,51 @@ export interface PricingTier {
 
 export const pricingTiers: PricingTier[] = [
   {
-    name: 'Essential',
-    price: 599,
-    description: 'Perfect for small events and portrait sessions',
+    name: 'Intimate',
+    price: 799,
+    description: 'Perfect for small ceremonies and elopements',
     inclusions: [
-      'Up to 2 hours of coverage',
-      '50 professionally edited photos',
+      'Up to 3 hours of coverage',
+      '100 professionally edited photos',
       'Online gallery for viewing and download',
-      'Print release included',
-      'Basic retouching'
+      'Full print release included',
+      'Professional retouching',
+      'Personal consultation'
     ]
   },
   {
-    name: 'Professional',
-    price: 1299,
-    description: 'Our most popular package for weddings and events',
+    name: 'Classic',
+    price: 1599,
+    description: 'Our most popular package for traditional weddings',
     inclusions: [
-      'Up to 6 hours of coverage',
-      '200+ professionally edited photos',
-      'Online gallery with sharing options',
-      'Print release and usage rights',
-      'Advanced retouching',
-      'Second photographer available',
-      'Engagement session included'
+      'Up to 8 hours of coverage',
+      '300+ professionally edited photos',
+      'Premium online gallery with sharing',
+      'Full print and usage rights',
+      'Advanced retouching and color grading',
+      'Second photographer included',
+      'Complimentary engagement session',
+      'USB drive with all images',
+      '4-week turnaround time'
     ],
     featured: true
   },
   {
-    name: 'Premium',
-    price: 2499,
-    description: 'Complete coverage for your special day',
+    name: 'Luxury',
+    price: 2999,
+    description: 'Complete premium coverage for your special day',
     inclusions: [
-      'Full day coverage (up to 10 hours)',
-      '400+ professionally edited photos',
-      'Premium online gallery',
-      'Full print and usage rights',
-      'Advanced retouching and color grading',
-      'Two photographers included',
-      'Engagement session included',
-      'Custom photo album (20 pages)',
-      'Priority editing (2-week turnaround)'
+      'Full day coverage (up to 12 hours)',
+      '500+ professionally edited photos',
+      'Luxury online gallery with slideshow',
+      'Full commercial usage rights',
+      'Premium retouching and artistic editing',
+      'Two photographers + assistant',
+      'Engagement and rehearsal sessions',
+      'Custom leather-bound album (30 pages)',
+      'USB drive in custom box',
+      'Priority editing (2-week turnaround)',
+      'Complimentary prints package'
     ]
   }
 ];

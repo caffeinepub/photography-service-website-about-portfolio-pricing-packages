@@ -24,21 +24,21 @@ export function LightboxModal({ image, onClose }: LightboxModalProps) {
 
   return (
     <Dialog open={true} onOpenChange={onClose}>
-      <DialogContent className="max-w-5xl w-full p-0 bg-background/95 backdrop-blur-sm border-none">
-        <DialogClose className="absolute right-4 top-4 z-50 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-          <X className="h-6 w-6 text-foreground" />
+      <DialogContent className="max-w-5xl w-full p-0 bg-background border border-border">
+        <DialogClose className="absolute right-4 top-4 z-50 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none">
+          <X className="h-5 w-5 text-foreground" strokeWidth={1.5} />
           <span className="sr-only">Close</span>
         </DialogClose>
         
-        <div className="p-4">
+        <div className="p-6">
           <img
             src={image.src}
             alt={image.title}
-            className="w-full h-auto max-h-[80vh] object-contain rounded-sm"
+            className="w-full h-auto max-h-[75vh] object-contain"
           />
-          <div className="mt-4 text-center">
-            <h3 className="text-xl font-serif font-semibold">{image.title}</h3>
-            <p className="text-sm text-muted-foreground">{image.category}</p>
+          <div className="mt-6 text-center">
+            <h3 className="text-lg font-serif font-medium">{image.title}</h3>
+            <p className="text-sm text-muted-foreground mt-1">{image.category}</p>
           </div>
         </div>
       </DialogContent>

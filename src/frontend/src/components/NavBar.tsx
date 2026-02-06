@@ -32,24 +32,21 @@ export function NavBar() {
   const navLinks = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About Us' },
-    { id: 'portfolio', label: 'Our Work' },
-    { id: 'pricing', label: 'Pricing' },
-    { id: 'packages', label: 'Packages' },
   ];
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/95 backdrop-blur-sm shadow-soft' : 'bg-transparent'
+        isScrolled ? 'bg-background/98 backdrop-blur-sm border-b border-border' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           <button
             onClick={() => scrollToSection('home')}
-            className="text-2xl font-serif font-semibold text-foreground hover:text-accent transition-colors"
+            className="text-xl font-serif font-medium text-foreground hover:text-foreground/70 transition-colors"
           >
-            Lumière Studio
+            The Stories By Vows
           </button>
 
           {/* Desktop Navigation */}
@@ -58,15 +55,16 @@ export function NavBar() {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-sm transition-colors"
+                className="px-3 py-2 text-sm text-foreground/70 hover:text-foreground transition-colors"
               >
                 {link.label}
               </button>
             ))}
             <Button
               onClick={() => scrollToSection('contact')}
-              className="ml-4"
+              variant="ghost"
               size="sm"
+              className="ml-2"
             >
               Get in Touch
             </Button>
@@ -75,28 +73,30 @@ export function NavBar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-foreground hover:bg-muted rounded-sm transition-colors"
+            className="md:hidden p-2 text-foreground hover:text-foreground/70 transition-colors"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-border">
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-1">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="px-4 py-3 text-left text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-sm transition-colors"
+                  className="px-3 py-2 text-left text-sm text-foreground/70 hover:text-foreground transition-colors"
                 >
                   {link.label}
                 </button>
               ))}
               <Button
                 onClick={() => scrollToSection('contact')}
-                className="mx-4 mt-2"
+                variant="ghost"
+                size="sm"
+                className="mx-3 mt-2 justify-start"
               >
                 Get in Touch
               </Button>

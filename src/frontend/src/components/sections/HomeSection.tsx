@@ -25,32 +25,34 @@ export function HomeSection() {
           alt="Photography hero"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/80" />
+        <div className="absolute inset-0 bg-background/40" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-semibold text-foreground leading-tight">
+        <div className="max-w-3xl mx-auto space-y-8 animate-fade-in">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-medium text-foreground leading-[1.1] tracking-tight">
             Capturing Moments,<br />Creating Memories
           </h1>
-          <p className="text-lg sm:text-xl text-foreground/80 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-foreground/60 max-w-xl mx-auto leading-relaxed">
             Professional photography services for weddings, portraits, events, and more. 
             We transform fleeting moments into timeless art.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Button
-              size="lg"
-              onClick={() => scrollToSection('portfolio')}
-              className="group"
+              size="default"
+              variant="ghost"
+              onClick={() => scrollToSection('about')}
+              className="group border border-foreground/20 hover:border-foreground/40"
             >
-              View Our Work
+              Learn More
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button
-              size="lg"
-              variant="outline"
+              size="default"
+              variant="ghost"
               onClick={() => scrollToSection('contact')}
+              className="border border-foreground/20 hover:border-foreground/40"
             >
               Book a Session
             </Button>
@@ -60,8 +62,8 @@ export function HomeSection() {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-        <div className="w-6 h-10 border-2 border-foreground/30 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-foreground/30 rounded-full" />
+        <div className="w-5 h-8 border border-foreground/20 flex items-start justify-center p-1.5">
+          <div className="w-0.5 h-2 bg-foreground/20" />
         </div>
       </div>
     </section>
