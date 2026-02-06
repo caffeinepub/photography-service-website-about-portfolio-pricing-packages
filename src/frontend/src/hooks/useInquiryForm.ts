@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSaveInquiry } from './useQueries';
 
 interface FormData {
@@ -23,6 +23,8 @@ interface InquiryFormData extends FormData {
   eventType: string;
 }
 
+const STORAGE_KEY = 'sent-inquiries';
+
 export function useInquiryForm() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -36,6 +38,15 @@ export function useInquiryForm() {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const saveInquiryMutation = useSaveInquiry();
+
+  // Clear localStorage on initialization
+  useEffect(() => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (error) {
+      console.error('Failed to clear localStorage:', error);
+    }
+  }, []);
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

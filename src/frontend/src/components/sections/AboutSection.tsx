@@ -39,10 +39,10 @@ export function AboutSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center mb-20">
           <h2 className="text-4xl sm:text-5xl font-serif font-medium text-foreground mb-6 tracking-tight">
-            About The Stories By Vows
+            About The Stories Behind VOWS
           </h2>
           <p className="text-base text-muted-foreground leading-relaxed">
-            Founded in 2021, The Stories By Vows has been dedicated to capturing life's most precious moments 
+            Founded in 2021, The Stories Behind VOWS has been dedicated to capturing life's most precious moments 
             with artistry and authenticity. We believe that every photograph tells a story, and our mission 
             is to preserve your memories in their most beautiful form. Our team of experienced photographers 
             combines technical expertise with creative vision to deliver images that you'll treasure forever.

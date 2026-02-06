@@ -10,7 +10,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <Camera size={20} className="text-foreground" />
-              <span className="text-lg font-serif font-medium">The Stories By Vows</span>
+              <span className="text-lg font-serif font-medium">The Stories Behind VOWS</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Capturing life's most precious moments with artistry and passion.

@@ -2,8 +2,52 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-persist-booking-inquiry-form-submissions-in-the-motoko-backend-so-that-inquiries-can-be-received-and-viewed-from-an-office-admin-page-not-just-stored-in-the-client-browser",
-      "featureTitle": "Persist Booking/Inquiry form submissions in the Motoko backend so that inquiries can be received and viewed from an office/admin page (not just stored in the client browser).",
+      "featureId": "feature-replace-the-studio-brand-name-text-the-stories-by-vows-with-exactly-the-stories-behind-vows-across-the-entire-site-ui-navigation-brand-label-footer-brand-label-about-section-heading-body-copy-and-any-other-user-facing-occurrences",
+      "featureTitle": "Replace the studio/brand name text \"The Stories By Vows\" with exactly \"The Stories Behind VOWS\" across the entire site UI (navigation brand label, footer brand label, About section heading/body copy, and any other user-facing occurrences).",
+      "files": [
+        "frontend/index.html",
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/components/NavBar.tsx",
+        "frontend/src/components/sections/AboutSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-32"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-remove-the-my-inquiries-received-inquiries-user-experience-from-the-public-site-remove-the-my-inquiries-navigation-link-remove-the-view-sent-inquiries-button-shown-after-successful-form-submission-and-remove-disable-the-received-inquiries-route-so-it-is-no-longer-accessible-from-the-public-ui",
+      "featureTitle": "Remove the \"My Inquiries\" / \"Received Inquiries\" user experience from the public site: remove the \"My Inquiries\" navigation link, remove the \"View Sent Inquiries\" button shown after successful form submission, and remove/disable the #/received-inquiries route so it is no longer accessible from the public UI.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/NavBar.tsx",
+        "frontend/src/components/sections/ContactSection.tsx",
+        "frontend/src/pages/ReceivedInquiriesPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-33"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-booking-inquiry-form-submission-no-longer-fails-with-the-error-message-failed-to-submit-inquiry-please-try-again-under-normal-operation-by-preventing-submission-while-the-backend-actor-is-still-loading-unavailable-and-by-providing-a-reliable-successful-submit-path-also-clear-any-previously-stored-local-inquiries-and-stop-persisting-new-inquiries-to-localstorage",
+      "featureTitle": "Ensure the Booking/Inquiry form submission no longer fails with the error message \"Failed to submit inquiry. Please try again.\" under normal operation by preventing submission while the backend actor is still loading/unavailable and by providing a reliable successful submit path. Also clear any previously stored local inquiries and stop persisting new inquiries to localStorage.",
       "files": [
         "frontend/src/components/sections/ContactSection.tsx",
         "frontend/src/hooks/useInquiryForm.ts"
@@ -17,66 +61,7 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-22"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-create-a-separate-office-admin-page-available-at-a-second-url-path-e-g-office-that-lists-all-received-inquiries-in-one-place-and-do-not-add-any-navigation-link-to-this-page-in-the-client-facing-ui",
-      "featureTitle": "Create a separate office/admin page available at a second URL path (e.g., #/office) that lists all received inquiries in one place, and do not add any navigation/link to this page in the client-facing UI.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/pages/OfficeInquiriesPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-23"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-restrict-the-office-admin-inquiries-page-so-that-it-is-not-accessible-to-clients-require-internet-identity-login-and-enforce-backend-authorization-for-listing-inquiries",
-      "featureTitle": "Restrict the office/admin inquiries page so that it is not accessible to clients: require Internet Identity login and enforce backend authorization for listing inquiries.",
-      "files": [
-        "frontend/src/hooks/useActor.ts",
-        "frontend/src/pages/OfficeInquiriesPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-24"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-provide-in-the-ui-copy-on-the-office-admin-page-the-two-urls-users-need-one-for-clients-public-site-and-one-for-the-office-admin-inquiries-page",
-      "featureTitle": "Provide (in the UI copy on the office/admin page) the two URLs users need: one for clients (public site) and one for the office/admin inquiries page.",
-      "files": [
-        "frontend/src/pages/OfficeInquiriesPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-25"
+        "REQ-34"
       ],
       "confidence": "high"
     }

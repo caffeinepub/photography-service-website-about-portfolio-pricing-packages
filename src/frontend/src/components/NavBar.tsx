@@ -46,7 +46,7 @@ export function NavBar() {
             onClick={() => scrollToSection('home')}
             className="text-xl font-serif font-medium text-foreground hover:text-foreground/70 transition-colors"
           >
-            The Stories By Vows
+            The Stories Behind VOWS
           </button>
 
           {/* Desktop Navigation */}

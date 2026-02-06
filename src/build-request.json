@@ -1,91 +1,69 @@
 {
   "kind": "build_request",
-  "title": "Add private office/admin URL to view received inquiries and persist inquiries in backend",
-  "priority": "normal",
+  "title": "Update site-wide brand name, remove My Inquiries feature, and fix inquiry submission failure",
+  "priority": "high",
   "requirements": [
     {
-      "id": "REQ-22",
-      "text": "Persist Booking/Inquiry form submissions in the Motoko backend so that inquiries can be received and viewed from an office/admin page (not just stored in the client browser).",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Give me 2 url's one for clint to saw our wedsite and send inquiry's and second one is to our office to recive the inquiry's"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Submitting the inquiry form creates a new inquiry record stored in the backend canister state (survives page reload and can be read from a different device/browser).",
-        "The inquiry payload stored includes: name, email, event type, preferred date, message, and a created timestamp.",
-        "The existing success state still appears after a successful submit.",
-        "No email sending is added."
-      ]
-    },
-    {
-      "id": "REQ-23",
-      "text": "Create a separate office/admin page available at a second URL path (e.g., #/office) that lists all received inquiries in one place, and do not add any navigation/link to this page in the client-facing UI.",
+      "id": "REQ-32",
+      "text": "Replace the studio/brand name text \"The Stories By Vows\" with exactly \"The Stories Behind VOWS\" across the entire site UI (navigation brand label, footer brand label, About section heading/body copy, and any other user-facing occurrences).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-4"
         ],
         "quotes": [
-          "But not to visible to clints and Give me 2 url's one for clint to saw our wedsite and send inquiry's and second one is to our office to recive the inquiry's"
+          "Change The name in all the site The Stories Behind VOWS not The stories By vows"
         ]
       },
       "acceptanceCriteria": [
-        "The client-facing website remains accessible at the normal/public URL (home page) and includes the inquiry form.",
-        "A separate office/admin view is accessible via a distinct URL path (hash-based route is acceptable, e.g., <site-url>/#/office).",
-        "There is no visible link/button in the NavBar, Home, About, Contact, or Footer that exposes the office/admin page to clients.",
-        "The office/admin page displays a clear heading (English) such as \"Office Inquiries\" and renders a table/list of inquiries with at least: submitted time, name, email, event type, preferred date, and message."
+        "All visible instances of \"The Stories By Vows\" (case-insensitive variants included) are replaced with \"The Stories Behind VOWS\".",
+        "NavBar brand button, Footer brand label, and About section heading render \"The Stories Behind VOWS\" on both desktop and mobile."
       ]
     },
     {
-      "id": "REQ-24",
-      "text": "Restrict the office/admin inquiries page so that it is not accessible to clients: require Internet Identity login and enforce backend authorization for listing inquiries.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "But not to visible to clints"
-        ]
-      },
-      "acceptanceCriteria": [
-        "If the user is not logged in with Internet Identity, the office/admin page shows a login prompt and does not show inquiries.",
-        "Backend endpoints that return inquiry lists reject unauthorized callers (not anonymous, and not in the configured allowlist).",
-        "If an unauthorized user navigates directly to the office/admin URL, they cannot see inquiry data and receive a clear access-denied message in the UI (English)."
-      ]
-    },
-    {
-      "id": "REQ-25",
-      "text": "Provide (in the UI copy on the office/admin page) the two URLs users need: one for clients (public site) and one for the office/admin inquiries page.",
+      "id": "REQ-33",
+      "text": "Remove the \"My Inquiries\" / \"Received Inquiries\" user experience from the public site: remove the \"My Inquiries\" navigation link, remove the \"View Sent Inquiries\" button shown after successful form submission, and remove/disable the #/received-inquiries route so it is no longer accessible from the public UI.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-4"
         ],
         "quotes": [
-          "Give me 2 url's one for clint to saw our wedsite and send inquiry's and second one is to our office to recive the inquiry's"
+          "remove my inquiries"
         ]
       },
       "acceptanceCriteria": [
-        "The office/admin page includes a small section that shows the public site URL and the office/admin URL (derived from window.location / current origin, not hard-coded).",
-        "The displayed URLs are in English labels such as \"Client website\" and \"Office inquiries\"."
+        "The NavBar no longer displays a \"My Inquiries\" link/button in desktop or mobile menus.",
+        "After a successful inquiry submission, the success state does not show any button/link that navigates to sent/received inquiries.",
+        "Navigating to #/received-inquiries does not show the prior inquiries table page (it should instead show the normal public site or a simple not-found-style fallback within the existing app routing)."
+      ]
+    },
+    {
+      "id": "REQ-34",
+      "text": "Ensure the Booking/Inquiry form submission no longer fails with the error message \"Failed to submit inquiry. Please try again.\" under normal operation by preventing submission while the backend actor is still loading/unavailable and by providing a reliable successful submit path. Also clear any previously stored local inquiries and stop persisting new inquiries to localStorage.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "shown Failed to submit inquiry. Please try again."
+        ]
+      },
+      "acceptanceCriteria": [
+        "If the backend actor is not ready, the form submit action is blocked (e.g., disabled button) and does not produce the \"Failed to submit inquiry. Please try again.\" error.",
+        "When the actor becomes available, submitting a valid inquiry results in the existing success UI state (\"Thank You! We've received your inquiry...\") without showing the failure alert.",
+        "The localStorage key \"sent-inquiries\" is cleared (removing previously saved inquiries), and successful submissions no longer write inquiries to localStorage."
       ]
     }
   ],
   "constraints": [
-    "Backend must remain a single Motoko actor in backend/main.mo; only add backend/migration.mo if required for upgrading existing stable state.",
-    "Do not edit any frontend files under frontend/src/components/ui or the immutable hook/bootstrap paths listed in SYSTEM_CONTEXT.",
-    "Do not add third-party authentication (only Internet Identity)."
+    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or anything in frontend/src/components/ui (compose instead).",
+    "Backend is single-actor; keep all Motoko logic in backend/main.mo if backend changes become necessary (none requested here)."
   ],
   "nonGoals": [
-    "Do not add email sending or SMS notifications for inquiries.",
-    "Do not create a separate deployment/canister/domain for the office/admin area; it should be a separate URL path within the same site.",
-    "Do not re-add removed public sections (Portfolio, Pricing, Packages)."
+    "Do not add a new admin/office inquiries view or any Internet Identity-gated admin route.",
+    "Do not introduce email sending or any third-party integrations for inquiries."
   ],
   "imageRequirements": {
     "required": [],

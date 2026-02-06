@@ -1,29 +1,10 @@
-import { useEffect, useState } from 'react';
 import { NavBar } from './components/NavBar';
 import { HomeSection } from './components/sections/HomeSection';
 import { AboutSection } from './components/sections/AboutSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/Footer';
-import { OfficeInquiriesPage } from './pages/OfficeInquiriesPage';
 
 function App() {
-  const [currentRoute, setCurrentRoute] = useState(window.location.hash);
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      setCurrentRoute(window.location.hash);
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
-  // Office/admin route
-  if (currentRoute === '#/office') {
-    return <OfficeInquiriesPage />;
-  }
-
-  // Default public website
   return (
     <div className="min-h-screen bg-background">
       <NavBar />

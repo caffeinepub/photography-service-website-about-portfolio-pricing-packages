@@ -1,18 +1,52 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T08:58:39.164Z",
+  "generatedAt": "2026-02-06T09:57:40.142Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 4,
-    "implemented": 4,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-22",
-        "summary": "Persist Booking/Inquiry form submissions in the Motoko backend so that inquiries can be received and viewed from an office/admin page (not just stored in the client browser).",
+        "id": "REQ-32",
+        "summary": "Replace the studio/brand name text \"The Stories By Vows\" with exactly \"The Stories Behind VOWS\" across the entire site UI (navigation brand label, footer brand label, About section heading/body copy, and any other user-facing occurrences).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/NavBar.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/sections/AboutSection.tsx",
+          "frontend/index.html"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/NavBar.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/sections/AboutSection.tsx",
+          "frontend/index.html"
+        ]
+      },
+      {
+        "id": "REQ-33",
+        "summary": "Remove the \"My Inquiries\" / \"Received Inquiries\" user experience from the public site: remove the \"My Inquiries\" navigation link, remove the \"View Sent Inquiries\" button shown after successful form submission, and remove/disable the #/received-inquiries route so it is no longer accessible from the public UI.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/NavBar.tsx",
+          "frontend/src/components/sections/ContactSection.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/pages/ReceivedInquiriesPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/NavBar.tsx",
+          "frontend/src/components/sections/ContactSection.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/pages/ReceivedInquiriesPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-34",
+        "summary": "Ensure the Booking/Inquiry form submission no longer fails with the error message \"Failed to submit inquiry. Please try again.\" under normal operation by preventing submission while the backend actor is still loading/unavailable and by providing a reliable successful submit path. Also clear any previously stored local inquiries and stop persisting new inquiries to localStorage.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/hooks/useInquiryForm.ts",
@@ -21,67 +55,23 @@
         "matchedFiles": [
           "frontend/src/hooks/useInquiryForm.ts",
           "frontend/src/components/sections/ContactSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-23",
-        "summary": "Create a separate office/admin page available at a second URL path (e.g., #/office) that lists all received inquiries in one place, and do not add any navigation/link to this page in the client-facing UI.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/OfficeInquiriesPage.tsx",
-          "frontend/src/App.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/OfficeInquiriesPage.tsx",
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-24",
-        "summary": "Restrict the office/admin inquiries page so that it is not accessible to clients: require Internet Identity login and enforce backend authorization for listing inquiries.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/OfficeInquiriesPage.tsx",
-          "frontend/src/hooks/useActor.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/OfficeInquiriesPage.tsx",
-          "frontend/src/hooks/useActor.ts"
-        ]
-      },
-      {
-        "id": "REQ-25",
-        "summary": "Provide (in the UI copy on the office/admin page) the two URLs users need: one for clients (public site) and one for the office/admin inquiries page.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/OfficeInquiriesPage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/OfficeInquiriesPage.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
-    "backend/authorization/MixinAuthorization.mo",
-    "backend/authorization/access-control.mo",
-    "backend/main.mo",
     "build-request.json",
-    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/index.html",
     "frontend/src/App.tsx",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/NavBar.tsx",
+    "frontend/src/components/sections/AboutSection.tsx",
     "frontend/src/components/sections/ContactSection.tsx",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/useActor.ts",
     "frontend/src/hooks/useInquiryForm.ts",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/pages/OfficeInquiriesPage.tsx",
-    "frontend/src/utils/urlParams.ts",
+    "frontend/src/pages/ReceivedInquiriesPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

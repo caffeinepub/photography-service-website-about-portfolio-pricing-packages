@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useInquiryForm } from '@/hooks/useInquiryForm';
+import { useActor } from '@/hooks/useActor';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,6 +10,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CheckCircle2, Loader2, Mail, Phone } from 'lucide-react';
 
 export function ContactSection() {
+  const { actor, isFetching: actorFetching } = useActor();
   const { formData, errors, isSubmitting, isSuccess, handleChange, handleSubmit, resetForm } = useInquiryForm();
   const [eventType, setEventType] = useState('');
 
@@ -20,6 +22,8 @@ export function ContactSection() {
   const handleEventTypeChange = (value: string) => {
     setEventType(value);
   };
+
+  const isActorReady = !!actor && !actorFetching;
 
   return (
     <section id="contact" className="py-24 bg-background">
@@ -190,12 +194,17 @@ export function ContactSection() {
                   size="default"
                   variant="ghost"
                   className="w-full border border-foreground hover:bg-foreground hover:text-background"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !isActorReady}
                 >
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Sending...
+                    </>
+                  ) : !isActorReady ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Connecting...
                     </>
                   ) : (
                     'Send Inquiry'

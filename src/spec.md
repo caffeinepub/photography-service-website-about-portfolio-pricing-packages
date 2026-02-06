@@ -1,15 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Store inquiry/booking form submissions in the backend and provide a private office/admin URL to securely view all received inquiries.
+**Goal:** Update the site-wide brand name, remove the public “My Inquiries” experience, and make the inquiry form submit reliably without local inquiry persistence.
 
 **Planned changes:**
-- Persist inquiry form submissions in the Motoko backend canister state (including name, email, event type, preferred date, message, and created timestamp).
-- Keep the existing successful-submit UI behavior after a backend-persisted submission.
-- Add a separate office/admin route (e.g., `#/office`) that lists all inquiries in a table/list with key fields and a clear “Office Inquiries” heading.
-- Do not add any visible navigation/link in the client-facing UI that reveals the office/admin page.
-- Require Internet Identity login to access the office/admin page, and enforce backend authorization so only allowed identities can list inquiries.
-- Show clear UI messaging for login required and access denied cases (English).
-- Display, on the office/admin page, the two URLs (client website and office inquiries) derived from the current origin (not hard-coded).
+- Replace all user-facing occurrences of “The Stories By Vows” (including case variants) with “The Stories Behind VOWS” across navigation, footer, About section, and any other UI text.
+- Remove the “My Inquiries” / “Received Inquiries” public UX: delete the NavBar link, remove the post-submit “View Sent Inquiries” button, and disable or reroute the `#/received-inquiries` route to a normal public page or a simple not-found fallback.
+- Prevent inquiry submission while the backend actor is loading/unavailable (e.g., disable submit) to avoid the “Failed to submit inquiry. Please try again.” error under normal operation, and ensure successful submission shows the existing success state.
+- Clear any previously stored inquiries from localStorage (key: `sent-inquiries`) and stop saving new inquiries to localStorage.
 
-**User-visible outcome:** Clients can submit inquiries on the public site as before, while office staff can visit a separate private URL, log in with Internet Identity, and view all inquiries stored in the backend (including across devices/browsers).
+**User-visible outcome:** The site consistently shows the updated brand name, users no longer see or can navigate to “My Inquiries/Received Inquiries,” and booking/inquiry submissions succeed reliably without showing the prior failure message or storing inquiries locally.

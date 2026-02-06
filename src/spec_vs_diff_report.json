@@ -1,75 +1,67 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T08:58:39.161Z",
-  "summary": "Diff adds backend inquiry storage and an admin/office page at #/office with Internet Identity-based login flow and admin-gated backend endpoints. However, the inquiry schema does not store event type and preferred date as explicit fields (they’re embedded into the message), and the office page URL-copy requirement cannot be confirmed from the truncated UI. The diff also introduces a secret admin-token/URL-parameter access-control initialization mechanism that was not requested.",
+  "generatedAt": "2026-02-06T09:57:40.139Z",
+  "summary": "Brand name text is updated in key UI components (NavBar, Footer, About) and the inquiry success UI no longer shows a link/button to sent/received inquiries. The inquiry hook now clears the prior localStorage key and appears to submit via a backend mutation instead of persisting locally. However, the diff does not provide clear evidence that the #/received-inquiries route is no longer accessible, nor that form submission is actually blocked/disabled while the backend actor is still loading.",
   "missing_requirements": [
     {
-      "id": "REQ-22",
-      "requirement": "Persist inquiry payload including: name, email, event type, preferred date, message, and a created timestamp.",
-      "reason": "Backend Inquiry type does not include event type or preferred date fields; frontend concatenates these values into the message string instead of persisting them as separate payload fields.",
+      "id": "REQ-32",
+      "requirement": "Replace \"The Stories By Vows\" with exactly \"The Stories Behind VOWS\" across the entire site UI (all user-facing occurrences, case-insensitive).",
+      "reason": "The diff shows several updated occurrences, but does not provide evidence for all user-facing occurrences across the entire UI (e.g., other sections/pages not shown here).",
       "evidence": [
-        "backend/main.mo (type Inquiry has name/email/phone/message/timestamp only)",
-        "frontend/src/hooks/useInquiryForm.ts (fullMessage embeds \"Event Type\" and \"Preferred Date\" into message)"
+        "frontend/src/components/NavBar.tsx",
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/components/sections/AboutSection.tsx",
+        "frontend/index.html",
+        "frontend-file-summaries.txt (truncated)"
       ]
     },
     {
-      "id": "REQ-25",
-      "requirement": "Office/admin page UI copy shows both URLs (client website URL and office inquiries URL) derived from window.location/current origin (not hard-coded) with English labels.",
-      "reason": "OfficeInquiriesPage computes clientUrl and officeUrl, but the diff summary is truncated before showing that these URLs are actually rendered with the required English labels.",
+      "id": "REQ-33",
+      "requirement": "Remove/disable the #/received-inquiries route so it is no longer accessible from the public UI (navigating to #/received-inquiries should not show the prior inquiries table page).",
+      "reason": "While App.tsx shows no routing logic and the navbar no longer includes a My Inquiries link, the diff does not show any routing configuration change (e.g., removal of a route mapping) and the ReceivedInquiriesPage file is still present (no content shown). Therefore it is not evidenced that direct navigation to #/received-inquiries is prevented or falls back to a not-found/public view.",
       "evidence": [
-        "frontend/src/pages/OfficeInquiriesPage.tsx (shows clientUrl and officeUrl variables; rendering truncated)"
+        "frontend/src/App.tsx",
+        "frontend/src/pages/ReceivedInquiriesPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-34",
+      "requirement": "Prevent inquiry submission while the backend actor is still loading/unavailable (block submission/disable submit) so normal use does not produce the failure message.",
+      "reason": "ContactSection computes an `isActorReady` flag, but the provided (truncated) content does not show it being used to disable/block form submission or prevent `handleSubmit` from being called when the actor is unavailable.",
+      "evidence": [
+        "frontend/src/components/sections/ContactSection.tsx (truncated)"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Admin authorization bootstrap via secret URL parameter token (e.g., caffeineAdminToken) and sessionStorage helpers for persisting URL parameters.",
-      "reason": "BuildRequest specifies restricting access via Internet Identity and backend allowlist; it does not request or mention a secret token mechanism or URL/session parameter persistence for admin access.",
+      "description": "Removed/omitted other site sections/pages (e.g., Portfolio/Pricing/Packages) from the main rendered app layout.",
+      "reason": "The BuildRequest only asks for brand text changes, removal of the My Inquiries experience, and fixing inquiry submission/localStorage behavior. It does not request removing other sections from the site. App.tsx now renders only Home/About/Contact and Footer.",
       "evidence": [
-        "frontend/src/hooks/useActor.ts (getSecretParameter('caffeineAdminToken') and _initializeAccessControlWithSecret)",
-        "frontend/src/utils/urlParams.ts (storeSessionParameter/getPersistedUrlParameter utilities, mentions admin tokens)"
+        "frontend/src/App.tsx",
+        "frontend-file-summaries.txt (truncated)"
       ]
     },
     {
-      "description": "Inquiry deletion and clear-all functionality exposed via backend endpoints and frontend hooks.",
-      "reason": "BuildRequest only requires viewing received inquiries on an office/admin page; it does not request deleting inquiries or clearing all inquiries.",
+      "description": "Added/changed footer copyright year and added an external \"caffeine.ai\" credit link.",
+      "reason": "Not requested by the BuildRequest requirements; appears to be an additional content change.",
       "evidence": [
-        "backend/main.mo (deleteInquiry, clearInquiries)",
-        "frontend/src/hooks/useQueries.ts (useDeleteInquiry)",
-        "frontend/src/pages/OfficeInquiriesPage.tsx (delete confirm state, handleDeleteInquiry)"
-      ]
-    },
-    {
-      "description": "User profile management (save/get caller profile) and role queries added to backend and frontend hooks.",
-      "reason": "BuildRequest does not ask for user profiles or role-management UI/APIs; only requires Internet Identity login and admin-gated listing of inquiries.",
-      "evidence": [
-        "backend/main.mo (UserProfile type, getCallerUserProfile, saveCallerUserProfile, getUserProfile, getUserRole)",
-        "frontend/src/hooks/useQueries.ts (useGetCallerUserProfile/useSaveCallerUserProfile/useGetCallerUserRole)",
-        "frontend/src/pages/OfficeInquiriesPage.tsx (profile setup state and save profile handler)"
-      ]
-    },
-    {
-      "description": "Inquiry payload now includes a phone field stored in backend.",
-      "reason": "REQ-22 specifies storing name, email, event type, preferred date, message, and created timestamp; phone is not requested as part of the persisted payload.",
-      "evidence": [
-        "backend/main.mo (Inquiry includes phone)",
-        "frontend/src/hooks/useQueries.ts (useSaveInquiry includes phone)",
-        "frontend/src/hooks/useInquiryForm.ts (FormData includes phone)"
+        "frontend/src/components/Footer.tsx"
       ]
     }
   ],
-  "confidence": 0.72,
+  "confidence": 0.62,
   "changed_files": [
-    "backend/main.mo",
     "frontend-file-summaries.txt",
+    "frontend/index.html",
     "frontend/src/App.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/NavBar.tsx",
+    "frontend/src/components/sections/AboutSection.tsx",
     "frontend/src/components/sections/ContactSection.tsx",
-    "frontend/src/hooks/useActor.ts",
     "frontend/src/hooks/useInquiryForm.ts",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/pages/OfficeInquiriesPage.tsx",
-    "frontend/src/utils/urlParams.ts",
+    "frontend/src/pages/ReceivedInquiriesPage.tsx",
     "project_state.json"
   ]
 }
