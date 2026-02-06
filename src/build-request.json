@@ -1,87 +1,91 @@
 {
   "kind": "build_request",
-  "title": "Simplify site navigation to Home, About Us, and Get in Touch; update footer to Instagram-only",
+  "title": "Add private office/admin URL to view received inquiries and persist inquiries in backend",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-16",
-      "text": "Remove the Our Work (Portfolio), Pricing, and Package Details/Packages sections from the site so that only the Home, About Us, and Get in Touch sections are visible.",
-      "target": "frontend",
+      "id": "REQ-22",
+      "text": "Persist Booking/Inquiry form submissions in the Motoko backend so that inquiries can be received and viewed from an office/admin page (not just stored in the client browser).",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "Remove the Pricing And Package Details & Our work Pages Only have to Visible Home Page & About us & Get in Touch Pages"
+          "Give me 2 url's one for clint to saw our wedsite and send inquiry's and second one is to our office to recive the inquiry's"
         ]
       },
       "acceptanceCriteria": [
-        "`frontend/src/App.tsx` no longer imports or renders `PortfolioSection`, `PricingSection`, or `PackagesSection`.",
-        "The page no longer shows any Portfolio/Our Work gallery UI, Pricing tiers UI, or Packages/Package Details accordion UI.",
-        "The Contact/Get in Touch section remains visible and functional."
+        "Submitting the inquiry form creates a new inquiry record stored in the backend canister state (survives page reload and can be read from a different device/browser).",
+        "The inquiry payload stored includes: name, email, event type, preferred date, message, and a created timestamp.",
+        "The existing success state still appears after a successful submit.",
+        "No email sending is added."
       ]
     },
     {
-      "id": "REQ-17",
-      "text": "Update the top navigation to remove links to Our Work, Pricing, and Packages, leaving only Home and About Us, plus the existing Get in Touch call-to-action.",
+      "id": "REQ-23",
+      "text": "Create a separate office/admin page available at a second URL path (e.g., #/office) that lists all received inquiries in one place, and do not add any navigation/link to this page in the client-facing UI.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "Remove the Pricing And Package Details & Our work Pages Only have to Visible Home Page & About us & Get in Touch Pages"
+          "But not to visible to clints and Give me 2 url's one for clint to saw our wedsite and send inquiry's and second one is to our office to recive the inquiry's"
         ]
       },
       "acceptanceCriteria": [
-        "`frontend/src/components/NavBar.tsx` no longer renders nav items for `portfolio`, `pricing`, or `packages` in desktop or mobile menus.",
-        "NavBar has working navigation for Home (`#home`) and About Us (`#about`), and the Get in Touch button scrolls to `#contact` on both desktop and mobile."
+        "The client-facing website remains accessible at the normal/public URL (home page) and includes the inquiry form.",
+        "A separate office/admin view is accessible via a distinct URL path (hash-based route is acceptable, e.g., <site-url>/#/office).",
+        "There is no visible link/button in the NavBar, Home, About, Contact, or Footer that exposes the office/admin page to clients.",
+        "The office/admin page displays a clear heading (English) such as \"Office Inquiries\" and renders a table/list of inquiries with at least: submitted time, name, email, event type, preferred date, and message."
       ]
     },
     {
-      "id": "REQ-18",
-      "text": "Update the Home hero section buttons so there is no call-to-action that scrolls to the removed Our Work/Portfolio section.",
-      "target": "frontend",
+      "id": "REQ-24",
+      "text": "Restrict the office/admin inquiries page so that it is not accessible to clients: require Internet Identity login and enforce backend authorization for listing inquiries.",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "Remove the Pricing And Package Details & Our work Pages"
+          "But not to visible to clints"
         ]
       },
       "acceptanceCriteria": [
-        "`frontend/src/components/sections/HomeSection.tsx` does not call `scrollToSection('portfolio')` anywhere.",
-        "All buttons shown in the Home hero scroll to sections that still exist (e.g., About Us and/or Get in Touch) and do not produce errors in the console when clicked."
+        "If the user is not logged in with Internet Identity, the office/admin page shows a login prompt and does not show inquiries.",
+        "Backend endpoints that return inquiry lists reject unauthorized callers (not anonymous, and not in the configured allowlist).",
+        "If an unauthorized user navigates directly to the office/admin URL, they cannot see inquiry data and receive a clear access-denied message in the UI (English)."
       ]
     },
     {
-      "id": "REQ-19",
-      "text": "Update the footer to remove the Quick Links and Contact sections entirely, and keep only a Follow Us area that contains a single Instagram link to https://www.instagram.com/thestoriesbehindvows?igsh=bWdrN3o1M21meDBn.",
+      "id": "REQ-25",
+      "text": "Provide (in the UI copy on the office/admin page) the two URLs users need: one for clients (public site) and one for the office/admin inquiries page.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "Remove Quick links and Contact Details Just  Add  instagram link at Follow Us Hear is the link https://www.instagram.com/thestoriesbehindvows?igsh=bWdrN3o1M21meDBn"
+          "Give me 2 url's one for clint to saw our wedsite and send inquiry's and second one is to our office to recive the inquiry's"
         ]
       },
       "acceptanceCriteria": [
-        "`frontend/src/components/Footer.tsx` no longer renders the Quick Links list and no longer renders any Contact details (email/phone/address).",
-        "The Follow Us section includes exactly one social link: Instagram, pointing to `https://www.instagram.com/thestoriesbehindvows?igsh=bWdrN3o1M21meDBn`, opening in a new tab (`target=\"_blank\"`) with `rel=\"noopener noreferrer\"`.",
-        "No Facebook or X links/icons are shown in the footer.",
-        "Footer layout remains visually consistent (no empty columns or obvious spacing gaps)."
+        "The office/admin page includes a small section that shows the public site URL and the office/admin URL (derived from window.location / current origin, not hard-coded).",
+        "The displayed URLs are in English labels such as \"Client website\" and \"Office inquiries\"."
       ]
     }
   ],
   "constraints": [
-    "Frontend files under `frontend/src/components/ui` and the immutable hook/bootstrap paths must not be edited.",
-    "Do not add backend persistence or new backend features; this change is frontend-only."
+    "Backend must remain a single Motoko actor in backend/main.mo; only add backend/migration.mo if required for upgrading existing stable state.",
+    "Do not edit any frontend files under frontend/src/components/ui or the immutable hook/bootstrap paths listed in SYSTEM_CONTEXT.",
+    "Do not add third-party authentication (only Internet Identity)."
   ],
   "nonGoals": [
-    "Redesigning the overall minimal visual theme beyond what is necessary to remove the specified sections and footer content.",
-    "Adding new social platforms or additional footer content beyond the requested Instagram link."
+    "Do not add email sending or SMS notifications for inquiries.",
+    "Do not create a separate deployment/canister/domain for the office/admin area; it should be a separate URL path within the same site.",
+    "Do not re-add removed public sections (Portfolio, Pricing, Packages)."
   ],
   "imageRequirements": {
     "required": [],

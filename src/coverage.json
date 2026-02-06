@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T08:17:47.843Z",
+  "generatedAt": "2026-02-06T08:58:39.164Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,60 +11,77 @@
     "implemented": 4,
     "items": [
       {
-        "id": "REQ-16",
-        "summary": "Remove the Our Work (Portfolio), Pricing, and Package Details/Packages sections from the site so that only the Home, About Us, and Get in Touch sections are visible.",
+        "id": "REQ-22",
+        "summary": "Persist Booking/Inquiry form submissions in the Motoko backend so that inquiries can be received and viewed from an office/admin page (not just stored in the client browser).",
         "status": "implemented",
         "plannedFiles": [
+          "frontend/src/hooks/useInquiryForm.ts",
+          "frontend/src/components/sections/ContactSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useInquiryForm.ts",
+          "frontend/src/components/sections/ContactSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-23",
+        "summary": "Create a separate office/admin page available at a second URL path (e.g., #/office) that lists all received inquiries in one place, and do not add any navigation/link to this page in the client-facing UI.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/OfficeInquiriesPage.tsx",
           "frontend/src/App.tsx"
         ],
         "matchedFiles": [
+          "frontend/src/pages/OfficeInquiriesPage.tsx",
           "frontend/src/App.tsx"
         ]
       },
       {
-        "id": "REQ-17",
-        "summary": "Update the top navigation to remove links to Our Work, Pricing, and Packages, leaving only Home and About Us, plus the existing Get in Touch call-to-action.",
+        "id": "REQ-24",
+        "summary": "Restrict the office/admin inquiries page so that it is not accessible to clients: require Internet Identity login and enforce backend authorization for listing inquiries.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/NavBar.tsx"
+          "frontend/src/pages/OfficeInquiriesPage.tsx",
+          "frontend/src/hooks/useActor.ts"
         ],
         "matchedFiles": [
-          "frontend/src/components/NavBar.tsx"
+          "frontend/src/pages/OfficeInquiriesPage.tsx",
+          "frontend/src/hooks/useActor.ts"
         ]
       },
       {
-        "id": "REQ-18",
-        "summary": "Update the Home hero section buttons so there is no call-to-action that scrolls to the removed Our Work/Portfolio section.",
+        "id": "REQ-25",
+        "summary": "Provide (in the UI copy on the office/admin page) the two URLs users need: one for clients (public site) and one for the office/admin inquiries page.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/sections/HomeSection.tsx"
+          "frontend/src/pages/OfficeInquiriesPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/sections/HomeSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-19",
-        "summary": "Update the footer to remove the Quick Links and Contact sections entirely, and keep only a Follow Us area that contains a single Instagram link to https://www.instagram.com/thestoriesbehindvows?igsh=bWdrN3o1M21meDBn.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/Footer.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/Footer.tsx"
+          "frontend/src/pages/OfficeInquiriesPage.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
+    "backend/authorization/MixinAuthorization.mo",
+    "backend/authorization/access-control.mo",
+    "backend/main.mo",
     "build-request.json",
+    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/src/App.tsx",
-    "frontend/src/components/Footer.tsx",
-    "frontend/src/components/NavBar.tsx",
-    "frontend/src/components/sections/HomeSection.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/sections/ContactSection.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInquiryForm.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/OfficeInquiriesPage.tsx",
+    "frontend/src/utils/urlParams.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

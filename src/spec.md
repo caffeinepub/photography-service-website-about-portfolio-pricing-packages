@@ -1,12 +1,15 @@
 # Specification
 
 ## Summary
-**Goal:** Simplify the site to only Home, About Us, and Get in Touch, and reduce the footer to a single Instagram link.
+**Goal:** Store inquiry/booking form submissions in the backend and provide a private office/admin URL to securely view all received inquiries.
 
 **Planned changes:**
-- Remove the Our Work/Portfolio, Pricing, and Packages (Package Details) sections so they are no longer visible on the page.
-- Update the top navigation to only include Home and About Us, plus the existing Get in Touch call-to-action (remove Our Work, Pricing, Packages links from desktop and mobile menus).
-- Update Home hero buttons so none link/scroll to the removed Portfolio/Our Work section, and all remaining CTAs scroll only to existing sections.
-- Update the footer to remove Quick Links and Contact details entirely, leaving only a “Follow Us” area with a single Instagram link to `https://www.instagram.com/thestoriesbehindvows?igsh=bWdrN3o1M21meDBn`.
+- Persist inquiry form submissions in the Motoko backend canister state (including name, email, event type, preferred date, message, and created timestamp).
+- Keep the existing successful-submit UI behavior after a backend-persisted submission.
+- Add a separate office/admin route (e.g., `#/office`) that lists all inquiries in a table/list with key fields and a clear “Office Inquiries” heading.
+- Do not add any visible navigation/link in the client-facing UI that reveals the office/admin page.
+- Require Internet Identity login to access the office/admin page, and enforce backend authorization so only allowed identities can list inquiries.
+- Show clear UI messaging for login required and access denied cases (English).
+- Display, on the office/admin page, the two URLs (client website and office inquiries) derived from the current origin (not hard-coded).
 
-**User-visible outcome:** Visitors can navigate only to Home and About Us and use Get in Touch; the footer shows only one social link (Instagram) and no longer shows quick links, contact details, or other social icons.
+**User-visible outcome:** Clients can submit inquiries on the public site as before, while office staff can visit a separate private URL, log in with Internet Identity, and view all inquiries stored in the backend (including across devices/browsers).

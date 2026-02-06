@@ -1,21 +1,23 @@
 {
   "frontend/src/index.css": "Global styles with clean minimal OKLCH color palette (neutral grays with zero chroma), refined typography with lighter font weights and tighter letter spacing, and antialiased rendering for a crisp minimal aesthetic.",
   "frontend/tailwind.config.js": "Tailwind configuration with minimal theme extensions including zero border radius, softer shadow presets (reduced opacity), and consistent animation definitions aligned with the clean minimal design system.",
-  "frontend/src/App.tsx": "Main application component rendering the simplified photography website with only Home, About Us, and Contact sections plus navigation and footer.",
+  "frontend/src/App.tsx": "Main application component with hash-based routing that renders the public website by default and the OfficeInquiriesPage when navigating to #/office.",
   "frontend/src/components/NavBar.tsx": "Minimal responsive navigation bar with \"The Stories By Vows\" branding, simplified nav links (Home and About Us only), and Get in Touch CTA button.",
-  "frontend/src/components/Footer.tsx": "Simplified footer with brand information and a single Instagram social link, removing Quick Links and Contact Info sections.",
+  "frontend/src/components/Footer.tsx": "Footer with brand information, contact details (email and phone as clickable links), and Instagram social link in a three-column layout.",
   "frontend/src/components/sections/HomeSection.tsx": "Hero section with updated CTAs that scroll to About Us and Contact sections instead of the removed Portfolio section.",
   "frontend/src/components/sections/AboutSection.tsx": "About section with updated branding to \"The Stories By Vows\" (founded in 2021), featuring highlight cards and specialty grid with minimal styling.",
   "frontend/src/components/sections/PortfolioSection.tsx": "Portfolio gallery with minimal filter buttons (underline selection state), subtle hover effects, and clean grid layout with reduced visual noise.",
   "frontend/src/components/sections/PricingSection.tsx": "Pricing cards with minimal borders, lighter typography, ghost button CTAs, and subtle featured state emphasis without heavy shadows or scaling.",
   "frontend/src/components/sections/PackagesSection.tsx": "Package accordion with clean borders, subtle hover states, lighter icon treatment, and consistent minimal typography hierarchy.",
-  "frontend/src/components/sections/ContactSection.tsx": "Contact form with clean input styling, minimal borders, ghost button submit with hover state, and simplified success state presentation.",
+  "frontend/src/components/sections/ContactSection.tsx": "Contact section with visible contact details and booking/inquiry form that submits to the backend canister, including phone number field and all required validation.",
   "frontend/src/components/LightboxModal.tsx": "Lightbox modal with clean dialog styling, minimal close button, subtle border, and centered content presentation aligned with the minimal theme.",
   "frontend/src/content/portfolio.ts": "Portfolio data structure with 12 images mapped to generated assets, categorized by type (Weddings, Portraits, Events, Product).",
   "frontend/src/content/pricing.ts": "Pricing tier data structure with updated wedding-focused packages (Intimate, Classic, Luxury) including revised prices, descriptions, and feature inclusions.",
   "frontend/src/content/packages.ts": "Detailed package information including coverage, deliverables, turnaround times, add-ons, and booking terms for all three tiers.",
-  "frontend/src/hooks/useInquiryForm.ts": "Custom React hook managing contact form state, validation (required fields, email format), and browser-only submission handling with session storage.",
+  "frontend/src/hooks/useInquiryForm.ts": "Custom React hook managing contact form state, validation, and backend submission via the useSaveInquiry mutation, storing inquiries in the backend canister instead of localStorage.",
   "frontend/index.html": "HTML entry point with updated title and meta description reflecting \"The Stories By Vows\" branding, includes Google Fonts preconnect links.",
   "frontend/.env": "Local environment configuration file setting the site domain-style name to \"vows-site\" for development builds.",
-  "frontend/.env.production": "Production environment configuration file setting the site domain-style name to \"vows-site\" for deployment builds."
+  "frontend/.env.production": "Production environment configuration file setting the site domain-style name to \"vows-site\" for deployment builds.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including inquiry management (get all, save, delete), user profile management, and authorization checks with proper cache invalidation.",
+  "frontend/src/pages/OfficeInquiriesPage.tsx": "Admin-only office page with Internet Identity authentication, user profile setup, access control, inquiry table display with delete functionality, and URL display section showing both client and office URLs."
 }

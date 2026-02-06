@@ -1,68 +1,85 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Simplify navigation to Home, About Us, and Get in Touch; Instagram-only footer",
+  "title": "Office/admin hash route to view backend-persisted inquiries with Internet Identity protection",
   "requirements": [
     {
-      "id": "REQ-16",
-      "summary": "Remove Portfolio/Our Work, Pricing, and Packages sections so only Home, About Us, and Get in Touch remain visible.",
+      "id": "REQ-22",
+      "summary": "Update inquiry form submission to persist inquiries via backend canister (not localStorage) while keeping the existing success UI.",
       "acceptanceCriteria": [
-        "`frontend/src/App.tsx` no longer imports or renders `PortfolioSection`, `PricingSection`, or `PackagesSection`.",
-        "The page no longer shows any Portfolio/Our Work gallery UI, Pricing tiers UI, or Packages/Package Details accordion UI.",
-        "The Contact/Get in Touch section remains visible and functional."
+        "Submitting the inquiry form creates a new inquiry record stored in the backend canister state (survives page reload and can be read from a different device/browser).",
+        "The inquiry payload stored includes: name, email, event type, preferred date, message, and a created timestamp.",
+        "The existing success state still appears after a successful submit.",
+        "No email sending is added."
       ],
       "file_operations": [
+        {
+          "path": "frontend/src/hooks/useInquiryForm.ts",
+          "operation": "modify",
+          "description": "Replace the localStorage-based submission with a backend call using the actor from the core-infrastructure (via existing useActor hook) to persist inquiries; ensure the submit flow still sets isSuccess on success and surfaces a clear error on failure. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Ensure the inquiry form passes eventType and preferred date into the hook submit payload and continues to show the existing success state after a successful backend persistence; do not add any email-sending UI or logic. Use existing shadcn-ui form primitives already imported (Button/Input/Select/Alert) to keep the UI consistent. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "summary": "Add a separate office/admin inquiries view at a distinct hash route (e.g., #/office) with no client-visible navigation entry.",
+      "acceptanceCriteria": [
+        "The client-facing website remains accessible at the normal/public URL (home page) and includes the inquiry form.",
+        "A separate office/admin view is accessible via a distinct URL path (hash-based route is acceptable, e.g., <site-url>/#/office).",
+        "There is no visible link/button in the NavBar, Home, About, Contact, or Footer that exposes the office/admin page to clients.",
+        "The office/admin page displays a clear heading (English) such as \"Office Inquiries\" and renders a table/list of inquiries with at least: submitted time, name, email, event type, preferred date, and message."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/OfficeInquiriesPage.tsx",
+          "operation": "create",
+          "description": "Create the Office Inquiries page UI with an English heading (e.g., \"Office Inquiries\") and a table/list rendering inquiry fields (submitted time, name, email, event type, preferred date, message) pulled from the backend actor; include loading and empty states. Use shadcn-ui components where available (e.g., Button, Alert) without modifying frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Remove imports and rendered instances of PortfolioSection, PricingSection, and PackagesSection so the page only composes HomeSection, AboutSection, ContactSection, and Footer."
+          "description": "Wire a minimal hash-based route switch so that the default/public app renders as-is, and navigating to #/office renders the new OfficeInquiriesPage; do not add any NavBar/Home/About/Contact/Footer links to the office route. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-17",
-      "summary": "Update the top navigation to only include Home and About Us plus the existing Get in Touch call-to-action.",
+      "id": "REQ-24",
+      "summary": "Gate the office/admin inquiries view behind Internet Identity login and show access-denied UI for non-admin/unauthorized users.",
       "acceptanceCriteria": [
-        "`frontend/src/components/NavBar.tsx` no longer renders nav items for `portfolio`, `pricing`, or `packages` in desktop or mobile menus.",
-        "NavBar has working navigation for Home (`#home`) and About Us (`#about`), and the Get in Touch button scrolls to `#contact` on both desktop and mobile."
+        "If the user is not logged in with Internet Identity, the office/admin page shows a login prompt and does not show inquiries.",
+        "Backend endpoints that return inquiry lists reject unauthorized callers (not anonymous, and not in the configured allowlist).",
+        "If an unauthorized user navigates directly to the office/admin URL, they cannot see inquiry data and receive a clear access-denied message in the UI (English)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/NavBar.tsx",
+          "path": "frontend/src/pages/OfficeInquiriesPage.tsx",
           "operation": "modify",
-          "description": "Update the navLinks list and any related rendering so only Home (#home) and About Us (#about) links remain in both desktop and mobile menus; keep Get in Touch CTA scrolling to #contact. (Do not edit anything under frontend/src/components/ui.)"
+          "description": "Add Internet Identity gating using the existing useInternetIdentity hook: if not authenticated, render a login prompt (and no inquiry data). Once authenticated, check admin authorization via the backend actor (e.g., isCallerAdmin/getCallerUserRole) before attempting to render inquiry list; if unauthorized or the backend rejects, show an English access-denied message and do not display any inquiry data. Use shadcn-ui Button/Alert for consistent prompts and messaging. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useActor.ts",
+          "operation": "modify",
+          "description": "Ensure actor-dependent query invalidation/clearing behavior is compatible with office/admin auth transitions (login/logout) so cached inquiry data is not shown after logout; rely on React Query cache clearing patterns already used in the app. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-18",
-      "summary": "Update the Home hero buttons so none scroll to the removed Portfolio/Our Work section.",
+      "id": "REQ-25",
+      "summary": "Show the two required URLs (client site and office inquiries) on the office/admin page, derived from the current origin.",
       "acceptanceCriteria": [
-        "`frontend/src/components/sections/HomeSection.tsx` does not call `scrollToSection('portfolio')` anywhere.",
-        "All buttons shown in the Home hero scroll to sections that still exist (e.g., About Us and/or Get in Touch) and do not produce errors in the console when clicked."
+        "The office/admin page includes a small section that shows the public site URL and the office/admin URL (derived from window.location / current origin, not hard-coded).",
+        "The displayed URLs are in English labels such as \"Client website\" and \"Office inquiries\"."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/sections/HomeSection.tsx",
+          "path": "frontend/src/pages/OfficeInquiriesPage.tsx",
           "operation": "modify",
-          "description": "Replace the hero CTA that scrolls to 'portfolio' with a CTA that scrolls to an existing section (e.g., 'about' and/or 'contact'); ensure no scrollToSection('portfolio') call remains and button clicks do not error."
-        }
-      ]
-    },
-    {
-      "id": "REQ-19",
-      "summary": "Simplify the footer to remove Quick Links and Contact sections and keep only a single Instagram link in Follow Us.",
-      "acceptanceCriteria": [
-        "`frontend/src/components/Footer.tsx` no longer renders the Quick Links list and no longer renders any Contact details (email/phone/address).",
-        "The Follow Us section includes exactly one social link: Instagram, pointing to `https://www.instagram.com/thestoriesbehindvows?igsh=bWdrN3o1M21meDBn`, opening in a new tab (`target=\"_blank\"`) with `rel=\"noopener noreferrer\"`.",
-        "No Facebook or X links/icons are shown in the footer.",
-        "Footer layout remains visually consistent (no empty columns or obvious spacing gaps)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/Footer.tsx",
-          "operation": "modify",
-          "description": "Remove Quick Links and Contact Info blocks entirely; update layout to avoid empty columns; keep a Follow Us area with exactly one Instagram link to https://www.instagram.com/thestoriesbehindvows?igsh=bWdrN3o1M21meDBn using target=\"_blank\" and rel=\"noopener noreferrer\"; remove any Facebook/X icons/links and unused icon imports."
+          "description": "Add an office page section that displays English-labeled URLs derived from window.location (origin for \"Client website\" and origin + '/#/office' for \"Office inquiries\"), without hard-coding deployment-specific values. Verify the component's usage instructions before implementing."
         }
       ]
     }

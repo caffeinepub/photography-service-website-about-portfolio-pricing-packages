@@ -10,7 +10,33 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
-export interface _SERVICE {}
+export interface Inquiry {
+  'id' : bigint,
+  'name' : string,
+  'email' : string,
+  'message' : string,
+  'timestamp' : bigint,
+  'phone' : string,
+}
+export interface UserProfile { 'name' : string }
+export type UserRole = { 'admin' : null } |
+  { 'user' : null } |
+  { 'guest' : null };
+export interface _SERVICE {
+  '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'clearInquiries' : ActorMethod<[], undefined>,
+  'deleteInquiry' : ActorMethod<[bigint], boolean>,
+  'getAllInquiries' : ActorMethod<[], Array<Inquiry>>,
+  'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
+  'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getInquiry' : ActorMethod<[bigint], [] | [Inquiry]>,
+  'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
+  'getUserRole' : ActorMethod<[Principal], UserRole>,
+  'isCallerAdmin' : ActorMethod<[], boolean>,
+  'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'saveInquiry' : ActorMethod<[string, string, string, string, bigint], bigint>,
+}
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];
 export declare const idlFactory: IDL.InterfaceFactory;

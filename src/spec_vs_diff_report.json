@@ -1,25 +1,75 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T08:17:47.840Z",
-  "summary": "The diff implements the requested navigation and section removals: App now renders only Home, About, Contact; NavBar contains only Home/About plus Get in Touch CTA (desktop and mobile); Home hero CTAs scroll only to About/Contact; Footer removes Quick Links and Contact info and keeps a single Instagram link with correct URL and security attributes. One extra, unrequested footer attribution/link was added.",
-  "missing_requirements": [],
-  "hallucinated_features": [
+  "generatedAt": "2026-02-06T08:58:39.161Z",
+  "summary": "Diff adds backend inquiry storage and an admin/office page at #/office with Internet Identity-based login flow and admin-gated backend endpoints. However, the inquiry schema does not store event type and preferred date as explicit fields (they’re embedded into the message), and the office page URL-copy requirement cannot be confirmed from the truncated UI. The diff also introduces a secret admin-token/URL-parameter access-control initialization mechanism that was not requested.",
+  "missing_requirements": [
     {
-      "description": "Added footer attribution/link to caffeine.ai and changed copyright year/message",
-      "reason": "REQ-19 only requested removing Quick Links/Contact and keeping a single Instagram link; it did not request adding external attribution content/links or changing the copyright line.",
+      "id": "REQ-22",
+      "requirement": "Persist inquiry payload including: name, email, event type, preferred date, message, and a created timestamp.",
+      "reason": "Backend Inquiry type does not include event type or preferred date fields; frontend concatenates these values into the message string instead of persisting them as separate payload fields.",
       "evidence": [
-        "frontend/src/components/Footer.tsx"
+        "backend/main.mo (type Inquiry has name/email/phone/message/timestamp only)",
+        "frontend/src/hooks/useInquiryForm.ts (fullMessage embeds \"Event Type\" and \"Preferred Date\" into message)"
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "requirement": "Office/admin page UI copy shows both URLs (client website URL and office inquiries URL) derived from window.location/current origin (not hard-coded) with English labels.",
+      "reason": "OfficeInquiriesPage computes clientUrl and officeUrl, but the diff summary is truncated before showing that these URLs are actually rendered with the required English labels.",
+      "evidence": [
+        "frontend/src/pages/OfficeInquiriesPage.tsx (shows clientUrl and officeUrl variables; rendering truncated)"
       ]
     }
   ],
-  "confidence": 0.86,
+  "hallucinated_features": [
+    {
+      "description": "Admin authorization bootstrap via secret URL parameter token (e.g., caffeineAdminToken) and sessionStorage helpers for persisting URL parameters.",
+      "reason": "BuildRequest specifies restricting access via Internet Identity and backend allowlist; it does not request or mention a secret token mechanism or URL/session parameter persistence for admin access.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts (getSecretParameter('caffeineAdminToken') and _initializeAccessControlWithSecret)",
+        "frontend/src/utils/urlParams.ts (storeSessionParameter/getPersistedUrlParameter utilities, mentions admin tokens)"
+      ]
+    },
+    {
+      "description": "Inquiry deletion and clear-all functionality exposed via backend endpoints and frontend hooks.",
+      "reason": "BuildRequest only requires viewing received inquiries on an office/admin page; it does not request deleting inquiries or clearing all inquiries.",
+      "evidence": [
+        "backend/main.mo (deleteInquiry, clearInquiries)",
+        "frontend/src/hooks/useQueries.ts (useDeleteInquiry)",
+        "frontend/src/pages/OfficeInquiriesPage.tsx (delete confirm state, handleDeleteInquiry)"
+      ]
+    },
+    {
+      "description": "User profile management (save/get caller profile) and role queries added to backend and frontend hooks.",
+      "reason": "BuildRequest does not ask for user profiles or role-management UI/APIs; only requires Internet Identity login and admin-gated listing of inquiries.",
+      "evidence": [
+        "backend/main.mo (UserProfile type, getCallerUserProfile, saveCallerUserProfile, getUserProfile, getUserRole)",
+        "frontend/src/hooks/useQueries.ts (useGetCallerUserProfile/useSaveCallerUserProfile/useGetCallerUserRole)",
+        "frontend/src/pages/OfficeInquiriesPage.tsx (profile setup state and save profile handler)"
+      ]
+    },
+    {
+      "description": "Inquiry payload now includes a phone field stored in backend.",
+      "reason": "REQ-22 specifies storing name, email, event type, preferred date, message, and created timestamp; phone is not requested as part of the persisted payload.",
+      "evidence": [
+        "backend/main.mo (Inquiry includes phone)",
+        "frontend/src/hooks/useQueries.ts (useSaveInquiry includes phone)",
+        "frontend/src/hooks/useInquiryForm.ts (FormData includes phone)"
+      ]
+    }
+  ],
+  "confidence": 0.72,
   "changed_files": [
+    "backend/main.mo",
     "frontend-file-summaries.txt",
     "frontend/src/App.tsx",
-    "frontend/src/components/Footer.tsx",
-    "frontend/src/components/NavBar.tsx",
-    "frontend/src/components/sections/HomeSection.tsx",
+    "frontend/src/components/sections/ContactSection.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInquiryForm.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/OfficeInquiriesPage.tsx",
+    "frontend/src/utils/urlParams.ts",
     "project_state.json"
   ]
 }

@@ -2,74 +2,81 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-remove-the-our-work-portfolio-pricing-and-package-details-packages-sections-from-the-site-so-that-only-the-home-about-us-and-get-in-touch-sections-are-visible",
-      "featureTitle": "Remove the Our Work (Portfolio), Pricing, and Package Details/Packages sections from the site so that only the Home, About Us, and Get in Touch sections are visible.",
+      "featureId": "feature-persist-booking-inquiry-form-submissions-in-the-motoko-backend-so-that-inquiries-can-be-received-and-viewed-from-an-office-admin-page-not-just-stored-in-the-client-browser",
+      "featureTitle": "Persist Booking/Inquiry form submissions in the Motoko backend so that inquiries can be received and viewed from an office/admin page (not just stored in the client browser).",
       "files": [
-        "frontend/src/App.tsx"
+        "frontend/src/components/sections/ContactSection.tsx",
+        "frontend/src/hooks/useInquiryForm.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-16"
+        "REQ-22"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-top-navigation-to-remove-links-to-our-work-pricing-and-packages-leaving-only-home-and-about-us-plus-the-existing-get-in-touch-call-to-action",
-      "featureTitle": "Update the top navigation to remove links to Our Work, Pricing, and Packages, leaving only Home and About Us, plus the existing Get in Touch call-to-action.",
+      "featureId": "feature-create-a-separate-office-admin-page-available-at-a-second-url-path-e-g-office-that-lists-all-received-inquiries-in-one-place-and-do-not-add-any-navigation-link-to-this-page-in-the-client-facing-ui",
+      "featureTitle": "Create a separate office/admin page available at a second URL path (e.g., #/office) that lists all received inquiries in one place, and do not add any navigation/link to this page in the client-facing UI.",
       "files": [
-        "frontend/src/components/NavBar.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/pages/OfficeInquiriesPage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-17"
+        "REQ-23"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-home-hero-section-buttons-so-there-is-no-call-to-action-that-scrolls-to-the-removed-our-work-portfolio-section",
-      "featureTitle": "Update the Home hero section buttons so there is no call-to-action that scrolls to the removed Our Work/Portfolio section.",
+      "featureId": "feature-restrict-the-office-admin-inquiries-page-so-that-it-is-not-accessible-to-clients-require-internet-identity-login-and-enforce-backend-authorization-for-listing-inquiries",
+      "featureTitle": "Restrict the office/admin inquiries page so that it is not accessible to clients: require Internet Identity login and enforce backend authorization for listing inquiries.",
       "files": [
-        "frontend/src/components/sections/HomeSection.tsx"
+        "frontend/src/hooks/useActor.ts",
+        "frontend/src/pages/OfficeInquiriesPage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-18"
+        "REQ-24"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-footer-to-remove-the-quick-links-and-contact-sections-entirely-and-keep-only-a-follow-us-area-that-contains-a-single-instagram-link-to-https-www-instagram-com-thestoriesbehindvows-igsh-bwdrn3o1m21medbn",
-      "featureTitle": "Update the footer to remove the Quick Links and Contact sections entirely, and keep only a Follow Us area that contains a single Instagram link to https://www.instagram.com/thestoriesbehindvows?igsh=bWdrN3o1M21meDBn.",
+      "featureId": "feature-provide-in-the-ui-copy-on-the-office-admin-page-the-two-urls-users-need-one-for-clients-public-site-and-one-for-the-office-admin-inquiries-page",
+      "featureTitle": "Provide (in the UI copy on the office/admin page) the two URLs users need: one for clients (public site) and one for the office/admin inquiries page.",
       "files": [
-        "frontend/src/components/Footer.tsx"
+        "frontend/src/pages/OfficeInquiriesPage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-19"
+        "REQ-25"
       ],
       "confidence": "high"
     }

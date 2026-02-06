@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useSaveInquiry } from './useQueries';
 
 interface FormData {
   name: string;
   email: string;
+  phone: string;
   date: string;
   message: string;
 }
@@ -10,6 +12,7 @@ interface FormData {
 interface FormErrors {
   name?: string;
   email?: string;
+  phone?: string;
   eventType?: string;
   date?: string;
   message?: string;
@@ -24,13 +27,15 @@ export function useInquiryForm() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
+    phone: '',
     date: '',
     message: ''
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const saveInquiryMutation = useSaveInquiry();
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,6 +53,10 @@ export function useInquiryForm() {
       newErrors.email = 'Email is required';
     } else if (!validateEmail(data.email)) {
       newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!data.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
     }
 
     if (!data.eventType) {
@@ -73,13 +82,12 @@ export function useInquiryForm() {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Clear error for this field when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
   };
 
-  const handleSubmit = (data: InquiryFormData) => {
+  const handleSubmit = async (data: InquiryFormData) => {
     const validationErrors = validateForm(data);
 
     if (Object.keys(validationErrors).length > 0) {
@@ -87,28 +95,32 @@ export function useInquiryForm() {
       return;
     }
 
-    setIsSubmitting(true);
     setErrors({});
 
-    // Simulate form submission (store in browser state only)
-    setTimeout(() => {
-      // Store inquiry in session storage (browser state only)
-      const inquiries = JSON.parse(sessionStorage.getItem('inquiries') || '[]');
-      inquiries.push({
-        ...data,
-        timestamp: new Date().toISOString()
+    try {
+      const timestamp = BigInt(Date.now());
+      const fullMessage = `Event Type: ${data.eventType}\nPreferred Date: ${data.date}\n\n${data.message}`;
+      
+      await saveInquiryMutation.mutateAsync({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        message: fullMessage,
+        timestamp,
       });
-      sessionStorage.setItem('inquiries', JSON.stringify(inquiries));
 
-      setIsSubmitting(false);
       setIsSuccess(true);
-    }, 1000);
+    } catch (error: any) {
+      console.error('Failed to submit inquiry:', error);
+      setErrors({ submit: 'Failed to submit inquiry. Please try again.' });
+    }
   };
 
   const resetForm = () => {
     setFormData({
       name: '',
       email: '',
+      phone: '',
       date: '',
       message: ''
     });
@@ -119,7 +131,7 @@ export function useInquiryForm() {
   return {
     formData,
     errors,
-    isSubmitting,
+    isSubmitting: saveInquiryMutation.isPending,
     isSuccess,
     handleChange,
     handleSubmit,
