@@ -1,0 +1,207 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Photography Service Marketing Site (Responsive, Portfolio, Pricing, Packages, Contact)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create a responsive marketing website with top navigation and sections for Home, About Us, Our Work, Pricing, and Packages/Package Details.",
+      "acceptanceCriteria": [
+        "Site has clear navigation links to Home, About Us, Our Work, Pricing, and Packages/Package Details.",
+        "All pages/sections are usable on mobile and desktop (responsive layout).",
+        "All user-facing text is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the main app shell that renders the top navigation and wires the required sections (Home hero+overview, About, Our Work, Pricing, Packages/Package Details, and CTA/contact area) in a responsive layout."
+        },
+        {
+          "path": "frontend/src/components/NavBar.tsx",
+          "operation": "create",
+          "description": "Implement a responsive top navigation with links that scroll to the required sections (Home, About Us, Our Work, Pricing, Packages)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement the About Us section with story, highlight cards, and a specialties list.",
+      "acceptanceCriteria": [
+        "About Us includes at least one narrative paragraph, a set of highlight cards, and a specialties list.",
+        "Layout remains readable and well-spaced on small screens."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/sections/AboutSection.tsx",
+          "operation": "create",
+          "description": "Create the About Us section containing an English narrative paragraph, 2–4 highlight cards, and a specialties list; ensure spacing and typography remain readable on mobile."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the AboutSection into the page flow and ensure the navigation target (anchor/id) is present."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Implement the Our Work (Portfolio) gallery with category filters and a lightbox/modal image preview.",
+      "acceptanceCriteria": [
+        "Gallery shows a grid of portfolio images with visible category labels or filter controls.",
+        "Selecting a filter updates the visible gallery items.",
+        "Clicking a gallery item opens a larger preview in a modal/lightbox and can be closed."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/sections/PortfolioSection.tsx",
+          "operation": "create",
+          "description": "Create a portfolio gallery section with category filter controls (e.g., Weddings, Portraits, Events, Product) and a responsive image grid that updates based on the selected filter."
+        },
+        {
+          "path": "frontend/src/components/LightboxModal.tsx",
+          "operation": "create",
+          "description": "Implement a reusable lightbox/modal component for image preview with close controls and basic accessibility (focus/escape handling). If using shadcn-ui Dialog for modal behavior, verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/content/portfolio.ts",
+          "operation": "create",
+          "description": "Add static portfolio data (categories + image sources + titles) used by the gallery filtering and modal preview; reference the generated portfolio placeholder images."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the PortfolioSection into the page flow and ensure the navigation target (anchor/id) is present."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement the Pricing section with at least 3 tiers, each showing price, description, and key inclusions.",
+      "acceptanceCriteria": [
+        "Pricing displays at least three tiers with price and bullet-point inclusions.",
+        "Pricing layout is readable on mobile and aligns cleanly on desktop."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/sections/PricingSection.tsx",
+          "operation": "create",
+          "description": "Create a Pricing section that renders at least three tier cards (Basic/Standard/Premium or similar) with price, short description, and bullet inclusions; keep responsive grid alignment."
+        },
+        {
+          "path": "frontend/src/content/pricing.ts",
+          "operation": "create",
+          "description": "Add static pricing tier content (names, prices, descriptions, inclusions) consumed by the Pricing section."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the PricingSection into the page flow and ensure the navigation target (anchor/id) is present."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Implement Package Details with consistent, scannable breakdowns for each package (coverage, deliverables, turnaround, add-ons, terms).",
+      "acceptanceCriteria": [
+        "Each package has a detailed breakdown (coverage, deliverables, turnaround, add-ons, terms).",
+        "Package details are scannable (headings, lists) and consistent across packages."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/sections/PackagesSection.tsx",
+          "operation": "create",
+          "description": "Create a Packages/Package Details section that expands each package into a detailed, scannable view (headings + lists) covering duration/coverage, deliverables, turnaround, add-ons, and booking terms. If using shadcn-ui Accordion for expand/collapse, verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/content/packages.ts",
+          "operation": "create",
+          "description": "Add static package detail content for multiple packages (coverage, deliverables, turnaround time, add-ons, terms) used by the Packages section."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the PackagesSection into the page flow and ensure the navigation target (anchor/id) is present."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Add a Contact/Inquiry CTA area with a validated form that stores submissions only in browser state and shows a success message.",
+      "acceptanceCriteria": [
+        "Form includes fields: name, email, event type, date, message.",
+        "Basic validation exists (required fields; email format).",
+        "On submit, a success confirmation is shown and no network request is required."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/sections/ContactSection.tsx",
+          "operation": "create",
+          "description": "Create a Contact/Inquiry CTA section with fields (name, email, event type, date, message), basic validation, and a success confirmation; store inquiries only in React/browser state with no network calls."
+        },
+        {
+          "path": "frontend/src/hooks/useInquiryForm.ts",
+          "operation": "create",
+          "description": "Add a small hook to manage inquiry form state, validation (required + email format), and local-only submission handling (in-memory state)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the ContactSection onto Home and/or as its own section near the bottom, ensuring it is reachable from navigation or CTA links."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Establish and apply a warm editorial design system (cream/charcoal accents, serif headings + sans body) consistently across the site.",
+      "acceptanceCriteria": [
+        "A consistent color palette and typography pairing is used across the site.",
+        "Primary and secondary button styles are consistent and accessible (contrast).",
+        "Cards/sections share consistent spacing and alignment patterns."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Define the global warm editorial theme via CSS variables and base styles (cream/charcoal palette, serif headings + clean sans body), plus consistent spacing and component primitives; avoid blue/purple-dominant colors."
+        },
+        {
+          "path": "frontend/src/components/SiteLayout.tsx",
+          "operation": "create",
+          "description": "Add a layout wrapper to enforce consistent max-width, section spacing, typography scale, and reusable button/card styles across all sections."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the site in SiteLayout and ensure consistent usage of shared styling patterns across all sections (buttons, cards, spacing, headings)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Reference generated static images (hero + 12 portfolio placeholders) from frontend/public/assets/generated in the UI.",
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced by the UI.",
+        "Home hero uses the generated hero image.",
+        "Portfolio gallery uses the generated portfolio images as placeholders/sample work."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/sections/HomeSection.tsx",
+          "operation": "create",
+          "description": "Create the Home hero + overview section and reference the generated hero banner image at frontend/public/assets/generated/hero-photography.dim_1920x900.png."
+        },
+        {
+          "path": "frontend/src/content/portfolio.ts",
+          "operation": "modify",
+          "description": "Wire the 12 generated portfolio placeholder images into the gallery dataset: frontend/public/assets/generated/portfolio-01.dim_1200x800.png, frontend/public/assets/generated/portfolio-02.dim_1200x800.png, frontend/public/assets/generated/portfolio-03.dim_1200x800.png, frontend/public/assets/generated/portfolio-04.dim_1200x800.png, frontend/public/assets/generated/portfolio-05.dim_1200x800.png, frontend/public/assets/generated/portfolio-06.dim_1200x800.png, frontend/public/assets/generated/portfolio-07.dim_1200x800.png, frontend/public/assets/generated/portfolio-08.dim_1200x800.png, frontend/public/assets/generated/portfolio-09.dim_1200x800.png, frontend/public/assets/generated/portfolio-10.dim_1200x800.png, frontend/public/assets/generated/portfolio-11.dim_1200x800.png, frontend/public/assets/generated/portfolio-12.dim_1200x800.png."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire HomeSection into the top of the site and ensure the hero image renders as the primary visual for the Home section."
+        }
+      ]
+    }
+  ]
+}

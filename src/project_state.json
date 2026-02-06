@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Website for a photography service with sections for pricing, about us, portfolio/our work, and package details.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Editorial photography hero banner with warm tones and soft bokeh (hero-photography.dim_1920x900.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-01.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-02.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-03.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-04.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-05.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-06.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-07.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-08.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-09.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-10.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-11.dim_1200x800.png)\n- Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-12.dim_1200x800.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-responsive-marketing-website-for-a-photography-service-with-a-top-navigation-and-sections-pages-for-home-hero-overview-about-us-our-work-portfolio-gallery-pricing-and-package-details",
+      "title": "Create a responsive marketing website for a photography service with a top navigation and sections/pages for: Home (hero + overview), About Us, Our Work (portfolio gallery), Pricing, and Package Details.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-about-us-section-page-with-a-short-studio-service-story-photographer-highlights-e-g-2-4-cards-and-a-list-of-service-specialties-e-g-weddings-portraits-events-product",
+      "title": "Implement the About Us section/page with: a short studio/service story, photographer highlights (e.g., 2–4 cards), and a list of service specialties (e.g., weddings, portraits, events, product).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-our-work-portfolio-section-page-as-a-gallery-with-category-filters-e-g-weddings-portraits-events-product-and-a-lightbox-modal-preview-when-an-image-is-clicked",
+      "title": "Implement the Our Work (Portfolio) section/page as a gallery with category filters (e.g., Weddings, Portraits, Events, Product) and a lightbox/modal preview when an image is clicked.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-pricing-section-page-with-a-clear-pricing-table-cards-for-at-least-3-tiers-e-g-basic-standard-premium-including-price-short-description-and-key-inclusions",
+      "title": "Implement the Pricing section/page with a clear pricing table/cards for at least 3 tiers (e.g., Basic, Standard, Premium), including price, short description, and key inclusions.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-package-details-section-page-that-expands-each-package-into-a-detailed-view-including-duration-coverage-deliverables-e-g-edited-photos-count-turnaround-time-add-ons-and-booking-terms",
+      "title": "Implement the Package Details section/page that expands each package into a detailed view including: duration/coverage, deliverables (e.g., edited photos count), turnaround time, add-ons, and booking terms.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-contact-inquiry-call-to-action-area-on-home-and-or-contact-section-with-a-simple-form-name-email-event-type-date-message-submission-should-show-a-success-message-and-store-the-inquiry-locally-in-browser-state-only-no-backend-persistence-unless-a-backend-is-explicitly-requested-later",
+      "title": "Add a Contact/Inquiry call-to-action area (on Home and/or Contact section) with a simple form (name, email, event type, date, message). Submission should show a success message and store the inquiry locally in browser state only (no backend persistence) unless a backend is explicitly requested later.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-establish-a-coherent-visual-theme-and-design-system-for-the-site-colors-typography-spacing-buttons-cards-and-apply-it-consistently-across-all-pages-sections-use-a-warm-editorial-style-e-g-cream-charcoal-accents-elegant-serif-headings-paired-with-clean-sans-serif-body-and-avoid-blue-purple-dominant-palettes",
+      "title": "Establish a coherent visual theme and design system for the site (colors, typography, spacing, buttons, cards) and apply it consistently across all pages/sections. Use a warm, editorial style (e.g., cream/charcoal accents, elegant serif headings paired with clean sans-serif body) and avoid blue/purple-dominant palettes.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-image-assets-to-support-the-design-hero-image-and-portfolio-placeholders-and-render-them-from-frontend-public-assets-generated-without-routing-images-through-the-backend",
+      "title": "Add generated static image assets to support the design (hero image and portfolio placeholders) and render them from frontend/public/assets/generated without routing images through the backend.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a photography service website including Pricing, About Us, Our Work/Portfolio, and Package Details sections/pages.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Photography Service Website (About, Portfolio, Pricing, Packages)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

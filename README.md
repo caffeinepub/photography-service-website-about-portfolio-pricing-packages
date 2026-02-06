@@ -1,2 +1,3 @@
-# photography-service-website-about-portfolio-pricing-packages
-Exported from Caffeine project: Photography Service Website (About, Portfolio, Pricing, Packages)
+## Photography Service Website (About, Portfolio, Pricing, Packages)
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

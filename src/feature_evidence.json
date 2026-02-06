@@ -1,0 +1,163 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-responsive-marketing-website-for-a-photography-service-with-a-top-navigation-and-sections-pages-for-home-hero-overview-about-us-our-work-portfolio-gallery-pricing-and-package-details",
+      "featureTitle": "Create a responsive marketing website for a photography service with a top navigation and sections/pages for: Home (hero + overview), About Us, Our Work (portfolio gallery), Pricing, and Package Details.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/NavBar.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-about-us-section-page-with-a-short-studio-service-story-photographer-highlights-e-g-2-4-cards-and-a-list-of-service-specialties-e-g-weddings-portraits-events-product",
+      "featureTitle": "Implement the About Us section/page with: a short studio/service story, photographer highlights (e.g., 2–4 cards), and a list of service specialties (e.g., weddings, portraits, events, product).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sections/AboutSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-our-work-portfolio-section-page-as-a-gallery-with-category-filters-e-g-weddings-portraits-events-product-and-a-lightbox-modal-preview-when-an-image-is-clicked",
+      "featureTitle": "Implement the Our Work (Portfolio) section/page as a gallery with category filters (e.g., Weddings, Portraits, Events, Product) and a lightbox/modal preview when an image is clicked.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/LightboxModal.tsx",
+        "frontend/src/components/sections/PortfolioSection.tsx",
+        "frontend/src/content/portfolio.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-pricing-section-page-with-a-clear-pricing-table-cards-for-at-least-3-tiers-e-g-basic-standard-premium-including-price-short-description-and-key-inclusions",
+      "featureTitle": "Implement the Pricing section/page with a clear pricing table/cards for at least 3 tiers (e.g., Basic, Standard, Premium), including price, short description, and key inclusions.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sections/PricingSection.tsx",
+        "frontend/src/content/pricing.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-package-details-section-page-that-expands-each-package-into-a-detailed-view-including-duration-coverage-deliverables-e-g-edited-photos-count-turnaround-time-add-ons-and-booking-terms",
+      "featureTitle": "Implement the Package Details section/page that expands each package into a detailed view including: duration/coverage, deliverables (e.g., edited photos count), turnaround time, add-ons, and booking terms.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sections/PackagesSection.tsx",
+        "frontend/src/content/packages.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-contact-inquiry-call-to-action-area-on-home-and-or-contact-section-with-a-simple-form-name-email-event-type-date-message-submission-should-show-a-success-message-and-store-the-inquiry-locally-in-browser-state-only-no-backend-persistence-unless-a-backend-is-explicitly-requested-later",
+      "featureTitle": "Add a Contact/Inquiry call-to-action area (on Home and/or Contact section) with a simple form (name, email, event type, date, message). Submission should show a success message and store the inquiry locally in browser state only (no backend persistence) unless a backend is explicitly requested later.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sections/ContactSection.tsx",
+        "frontend/src/hooks/useInquiryForm.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-establish-a-coherent-visual-theme-and-design-system-for-the-site-colors-typography-spacing-buttons-cards-and-apply-it-consistently-across-all-pages-sections-use-a-warm-editorial-style-e-g-cream-charcoal-accents-elegant-serif-headings-paired-with-clean-sans-serif-body-and-avoid-blue-purple-dominant-palettes",
+      "featureTitle": "Establish a coherent visual theme and design system for the site (colors, typography, spacing, buttons, cards) and apply it consistently across all pages/sections. Use a warm, editorial style (e.g., cream/charcoal accents, elegant serif headings paired with clean sans-serif body) and avoid blue/purple-dominant palettes.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/index.css"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-generated-static-image-assets-to-support-the-design-hero-image-and-portfolio-placeholders-and-render-them-from-frontend-public-assets-generated-without-routing-images-through-the-backend",
+      "featureTitle": "Add generated static image assets to support the design (hero image and portfolio placeholders) and render them from frontend/public/assets/generated without routing images through the backend.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sections/HomeSection.tsx",
+        "frontend/src/content/portfolio.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

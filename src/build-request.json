@@ -1,0 +1,186 @@
+{
+  "kind": "build_request",
+  "title": "Photography Service Website (About, Portfolio, Pricing, Packages)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a responsive marketing website for a photography service with a top navigation and sections/pages for: Home (hero + overview), About Us, Our Work (portfolio gallery), Pricing, and Package Details.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a website for photography service inlude pricing & about us & our work & package details"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Site has clear navigation links to Home, About Us, Our Work, Pricing, and Packages/Package Details.",
+        "All pages/sections are usable on mobile and desktop (responsive layout).",
+        "All user-facing text is in English."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement the About Us section/page with: a short studio/service story, photographer highlights (e.g., 2–4 cards), and a list of service specialties (e.g., weddings, portraits, events, product).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "about us"
+        ]
+      },
+      "acceptanceCriteria": [
+        "About Us includes at least one narrative paragraph, a set of highlight cards, and a specialties list.",
+        "Layout remains readable and well-spaced on small screens."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement the Our Work (Portfolio) section/page as a gallery with category filters (e.g., Weddings, Portraits, Events, Product) and a lightbox/modal preview when an image is clicked.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "our work"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Gallery shows a grid of portfolio images with visible category labels or filter controls.",
+        "Selecting a filter updates the visible gallery items.",
+        "Clicking a gallery item opens a larger preview in a modal/lightbox and can be closed."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement the Pricing section/page with a clear pricing table/cards for at least 3 tiers (e.g., Basic, Standard, Premium), including price, short description, and key inclusions.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "pricing"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Pricing displays at least three tiers with price and bullet-point inclusions.",
+        "Pricing layout is readable on mobile and aligns cleanly on desktop."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement the Package Details section/page that expands each package into a detailed view including: duration/coverage, deliverables (e.g., edited photos count), turnaround time, add-ons, and booking terms.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "package details"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each package has a detailed breakdown (coverage, deliverables, turnaround, add-ons, terms).",
+        "Package details are scannable (headings, lists) and consistent across packages."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Add a Contact/Inquiry call-to-action area (on Home and/or Contact section) with a simple form (name, email, event type, date, message). Submission should show a success message and store the inquiry locally in browser state only (no backend persistence) unless a backend is explicitly requested later.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a website for photography service inlude pricing & about us & our work & package details"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Form includes fields: name, email, event type, date, message.",
+        "Basic validation exists (required fields; email format).",
+        "On submit, a success confirmation is shown and no network request is required."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Establish a coherent visual theme and design system for the site (colors, typography, spacing, buttons, cards) and apply it consistently across all pages/sections. Use a warm, editorial style (e.g., cream/charcoal accents, elegant serif headings paired with clean sans-serif body) and avoid blue/purple-dominant palettes.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a website for photography service inlude pricing & about us & our work & package details"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A consistent color palette and typography pairing is used across the site.",
+        "Primary and secondary button styles are consistent and accessible (contrast).",
+        "Cards/sections share consistent spacing and alignment patterns."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add generated static image assets to support the design (hero image and portfolio placeholders) and render them from frontend/public/assets/generated without routing images through the backend.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a website for photography service inlude pricing & about us & our work & package details"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced by the UI.",
+        "Home hero uses the generated hero image.",
+        "Portfolio gallery uses the generated portfolio images as placeholders/sample work."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui (read-only UI components must be composed, not modified).",
+    "Do not edit files in frontend immutablePaths (frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx).",
+    "Backend must remain a single Motoko actor if any backend work is later added."
+  ],
+  "nonGoals": [
+    "Online payments, bookings with calendars, or third-party integrations.",
+    "Admin dashboard/CMS for managing portfolio items.",
+    "User accounts or authentication (Internet Identity) unless explicitly requested."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Editorial photography hero banner with warm tones and soft bokeh (hero-photography.dim_1920x900.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-01.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-02.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-03.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-04.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-05.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-06.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-07.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-08.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-09.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-10.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-11.dim_1200x800.png)",
+      "Set of 12 portfolio placeholder images with varied subjects (e.g., wedding detail, portrait, event, product) in a consistent warm editorial grade (portfolio-12.dim_1200x800.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}
